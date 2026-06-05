@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Mesas | ESKONDIDINHO EVENTOS</title>
+    <meta name="description"
+        content="Reserve sua mesa VIP no Eskondidinho Eventos. Mesa Pista, Bistrô, Palco ou Camarote — garanta seu conforto!">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reservas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-logo">
+                <span class="logo-text">ES<span class="logo-k">K</span>ONDIDINHO</span>
+            </a>
+            <ul class="navbar-menu" id="navMenu">
+                <li><a href="index.html#eventos">Eventos</a></li>
+                <li><a href="index.html#reservas">Reservas</a></li>
+                <li><a href="index.html#como-funciona">Como Funciona</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+                <li><a href="https://eskondidinhoeventos.pagtickets.com.br/" target="_blank" class="navbar-cta">🎟️
+                        Ingressos</a></li>
+            </ul>
+            <div class="navbar-social">
+                <a href="https://wa.me/554791813793" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/eskondidinho_eventos/" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/Eskondidinho/" target="_blank"><i class="fab fa-facebook"></i></a>
+            </div>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO MINI -->
+    <section class="reservas-hero">
+        <div class="container">
+            <h1 class="section-title">Reserve sua <span>Mesa VIP</span></h1>
+
+        </div>
+    </section>
+
+    <!-- EVENT SELECTOR -->
+    <section class="checkout-section" id="checkout">
+        <div class="container">
+            <h2 class="section-title">Escolha o <span>Evento</span></h2>
+            <p class="section-subtitle">Selecione a data desejada para reservar sua mesa via PagTickets</p>
+
+            <div class="checkout-grid">
+                <a href="mapa.html?id=23788" class="checkout-card" data-date="2026-06-03">
+                    <div class="checkout-date"><span class="checkout-day">03</span><span
+                            class="checkout-month">JUN</span><span class="checkout-weekday">QUARTA</span></div>
+                    <div class="checkout-info">
+                        <h3>Mega Tri Baile</h3>
+                        <p>Novos Garotos • Banda Gdó • Garotos de Ouro</p>
+                    </div>
+                    <div class="checkout-action"><span class="checkout-btn">Reservar Mesa →</span></div>
+                </a>
+                <a href="mapa.html?id=23962" class="checkout-card" data-date="2026-06-05">
+                    <div class="checkout-date"><span class="checkout-day">05</span><span
+                            class="checkout-month">JUN</span><span class="checkout-weekday">SEXTA</span></div>
+                    <div class="checkout-info">
+                        <h3>Forrónejo</h3>
+                        <p>Ricardo &amp; Juninho • Samuka &amp; Brasinha</p>
+                    </div>
+                    <div class="checkout-action"><span class="checkout-btn">Reservar Mesa →</span></div>
+                </a>
+                <a href="mapa.html?id=23964" class="checkout-card" data-date="2026-06-12">
+                    <div class="checkout-date"><span class="checkout-day">12</span><span
+                            class="checkout-month">JUN</span><span class="checkout-weekday">SEXTA</span></div>
+                    <div class="checkout-info">
+                        <h3>Baile dos Namorados</h3>
+                        <p>As Garotinhas de Ouro • Ricardo &amp; Juninho • Samuka …</p>
+                    </div>
+                    <div class="checkout-action"><span class="checkout-btn">Reservar Mesa →</span></div>
+                </a>
+                <a href="mapa.html?id=23966" class="checkout-card" data-date="2026-06-19">
+                    <div class="checkout-date"><span class="checkout-day">19</span><span
+                            class="checkout-month">JUN</span><span class="checkout-weekday">SEXTA</span></div>
+                    <div class="checkout-info">
+                        <h3>Gigante da Vaneira</h3>
+                        <p>Ricardo &amp; Juninho • Samuka &amp; Brasinha • Legião Gaúch…</p>
+                    </div>
+                    <div class="checkout-action"><span class="checkout-btn">Reservar Mesa →</span></div>
+                </a>
+                <a href="mapa.html?id=23968" class="checkout-card" data-date="2026-06-20">
+                    <div class="checkout-date"><span class="checkout-day">20</span><span
+                            class="checkout-month">JUN</span><span class="checkout-weekday">SÁBADO</span></div>
+                    <div class="checkout-info">
+                        <h3>Sabadão Top</h3>
+                        <p>Ricardo &amp; Juninho • Samuka &amp; Brasinha • Wilceu Pause</p>
+                    </div>
+                    <div class="checkout-action"><span class="checkout-btn">Reservar Mesa →</span></div>
+                </a>
+                <a href="mapa.html?id=23970" class="checkout-card" data-date="2026-06-26">
+                    <div class="checkout-date"><span class="checkout-day">26</span><span
+                            class="checkout-month">JUN</span><span class="checkout-weekday">SEXTA</span></div>
+                    <div class="checkout-info">
+                        <h3>Super Sexta</h3>
+                        <p>26 • 06 - Ricardo &amp; Juninho • Samuka &amp; Brasinha • Grupo Modão…</p>
+                    </div>
+                    <div class="checkout-action"><span class="checkout-btn">Reservar Mesa →</span></div>
+                </a>
+                <a href="mapa.html?id=23972" class="checkout-card" data-date="2026-06-27">
+                    <div class="checkout-date"><span class="checkout-day">27</span><span
+                            class="checkout-month">JUN</span><span class="checkout-weekday">SÁBADO</span></div>
+                    <div class="checkout-info">
+                        <h3>Flashback do Eskondidinho</h3>
+                        <p>Flashback do Eskondidinho</p>
+                    </div>
+                    <div class="checkout-action"><span class="checkout-btn">Reservar Mesa →</span></div>
+                </a>
+            </div>
+
+            <div class="checkout-help">
+                <p>Dúvidas sobre reservas? Fale conosco!</p>
+                <a href="https://wa.me/554791813793?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20reserva%20de%20mesas!"
+                    target="_blank" class="reservas-cta">📱 WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Eskondidinho Eventos — CNPJ: 02.891.140/0001-22 — <a href="index.html">Voltar ao Início</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/554791813793" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+
+    <script src="data-loader.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+            document.getElementById('hamburger').classList.toggle('active');
+        }
+
+        // Carrega eventos dinamicamente
+        loadEventsData().then(data => {
+            if (data) renderCheckoutCards(data);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESKONDIDINHO EVENTOS | O Melhor Bailão do Vale do Itajaí</title>
+    <meta name="description"
+        content="O melhor bailão do Vale do Itajaí! Garanta seu ingresso para os melhores bailes de Itajaí, SC. Bandas ao vivo, reserva de mesas VIP e diversão garantida desde 2013.">
+    <meta name="keywords"
+        content="eskondidinho, eventos, baile, itajaí, vale do itajaí, banda, ingresso, festa, santa catarina">
+    <meta property="og:title" content="ESKONDIDINHO EVENTOS | O Melhor Bailão do Vale do Itajaí">
+    <meta property="og:description"
+        content="Garanta seu ingresso! Bailes com as melhores bandas do sul do Brasil, reserva de mesas VIP e diversão garantida.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.eskondidinho.com.br">
+    <meta property="og:image" content="assets/hero-bg.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ============ POPUP DE BOAS-VINDAS ============ -->
+    <style>
+        /* ---- Popup Variables ---- */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            opacity: 0;
+            animation: popupFadeIn 0.6s ease forwards;
+            padding: 20px;
+        }
+
+        @keyframes popupFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .popup-particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 100000;
+            overflow: hidden;
+        }
+
+        .popup-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #00f06a;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #00f06a, 0 0 12px rgba(0, 240, 106, 0.6);
+            animation: popupFloatUp linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes popupFloatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .popup-card {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            background: rgba(15, 15, 15, 0.95);
+            border-radius: 20px;
+            padding: 40px 35px 35px;
+            z-index: 100001;
+            transform: scale(0.7) translateY(40px);
+            animation: popupPopIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+            overflow: hidden;
+        }
+
+        @keyframes popupPopIn {
+            to {
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .popup-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: conic-gradient(from var(--popup-angle, 0deg), #00f06a, transparent 40%, transparent 60%, #00f06a);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: popupRotateBorder 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @property --popup-angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @keyframes popupRotateBorder {
+            to {
+                --popup-angle: 360deg;
+            }
+        }
+
+        .popup-card::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 21px;
+            border: 1px solid rgba(0, 240, 106, 0.3);
+            box-shadow: 0 0 15px rgba(0, 240, 106, 0.15), 0 0 40px rgba(0, 240, 106, 0.08), inset 0 0 15px rgba(0, 240, 106, 0.15);
+            pointer-events: none;
+        }
+
+        .popup-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            z-index: 2;
+        }
+
+        .popup-corner::before,
+        .popup-corner::after {
+            content: '';
+            position: absolute;
+            background: #00f06a;
+            box-shadow: 0 0 8px #00f06a, 0 0 16px rgba(0, 240, 106, 0.6);
+        }
+
+        .popup-corner::before {
+            width: 100%;
+            height: 2px;
+        }
+
+        .popup-corner::after {
+            width: 2px;
+            height: 100%;
+        }
+
+        .popup-corner.ptl {
+            top: 10px;
+            left: 10px;
+        }
+
+        .popup-corner.ptr {
+            top: 10px;
+            right: 10px;
+        }
+
+        .popup-corner.ptr::before {
+            right: 0;
+        }
+
+        .popup-corner.ptr::after {
+            right: 0;
+        }
+
+        .popup-corner.pbl {
+            bottom: 10px;
+            left: 10px;
+        }
+
+        .popup-corner.pbl::before {
+            bottom: 0;
+        }
+
+        .popup-corner.pbl::after {
+            bottom: 0;
+        }
+
+        .popup-corner.pbr {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .popup-corner.pbr::before {
+            right: 0;
+            bottom: 0;
+        }
+
+        .popup-corner.pbr::after {
+            right: 0;
+            bottom: 0;
+        }
+
+        .popup-logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .popup-logo img {
+            width: 90px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(0, 240, 106, 0.6)) drop-shadow(0 0 40px rgba(0, 240, 106, 0.2));
+            animation: popupLogoPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes popupLogoPulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 15px rgba(0, 240, 106, 0.6)) drop-shadow(0 0 30px rgba(0, 240, 106, 0.15));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 25px rgba(0, 240, 106, 0.6)) drop-shadow(0 0 50px rgba(0, 240, 106, 0.3));
+            }
+        }
+
+        .popup-greeting {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .popup-greeting h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .popup-greeting .popup-wave {
+            display: inline-block;
+            animation: popupWaveHand 1.8s ease-in-out infinite;
+            transform-origin: 70% 70%;
+            font-size: 1.5rem;
+        }
+
+        @keyframes popupWaveHand {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            15% {
+                transform: rotate(14deg);
+            }
+
+            30% {
+                transform: rotate(-8deg);
+            }
+
+            40% {
+                transform: rotate(14deg);
+            }
+
+            50% {
+                transform: rotate(-4deg);
+            }
+
+            60% {
+                transform: rotate(10deg);
+            }
+
+            70% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .popup-subtitle-text {
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #00f06a;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            text-shadow: 0 0 10px rgba(0, 240, 106, 0.15);
+        }
+
+        .popup-neon-divider {
+            width: 60px;
+            height: 2px;
+            background: #00f06a;
+            margin: 0 auto 22px;
+            border-radius: 2px;
+            box-shadow: 0 0 8px #00f06a, 0 0 20px rgba(0, 240, 106, 0.15);
+        }
+
+        .popup-message {
+            text-align: center;
+            color: #b0b0b0;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .popup-message strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .popup-whatsapp-tip {
+            background: rgba(0, 240, 106, 0.06);
+            border: 1px solid rgba(0, 240, 106, 0.2);
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .popup-whatsapp-tip .popup-tip-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            animation: popupPhoneBuzz 2s ease-in-out infinite;
+        }
+
+        @keyframes popupPhoneBuzz {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            5% {
+                transform: rotate(8deg);
+            }
+
+            10% {
+                transform: rotate(-8deg);
+            }
+
+            15% {
+                transform: rotate(6deg);
+            }
+
+            20% {
+                transform: rotate(-4deg);
+            }
+
+            25% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .popup-whatsapp-tip p {
+            color: #b0b0b0;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .popup-whatsapp-tip p strong {
+            color: #00f06a;
+            font-weight: 700;
+        }
+
+        .popup-cta-btn {
+            display: block;
+            width: 100%;
+            padding: 16px 30px;
+            background: #00f06a;
+            color: #000;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 240, 106, 0.15), 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup-cta-btn:hover {
+            background: #00ff72;
+            box-shadow: 0 0 30px rgba(0, 240, 106, 0.6), 0 0 60px rgba(0, 240, 106, 0.25), 0 4px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .popup-cta-btn:active {
+            transform: translateY(0);
+        }
+
+        .popup-cta-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: skewX(-20deg);
+            animation: popupShineSweep 3s ease-in-out infinite;
+        }
+
+        @keyframes popupShineSweep {
+
+            0%,
+            100% {
+                left: -60%;
+            }
+
+            50% {
+                left: 120%;
+            }
+        }
+
+        .popup-footer-text {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .popup-overlay.popup-closing {
+            animation: popupFadeOut 0.4s ease forwards;
+        }
+
+        .popup-overlay.popup-closing .popup-card {
+            animation: popupPopOut 0.4s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+        }
+
+        @keyframes popupFadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes popupPopOut {
+            to {
+                transform: scale(0.7) translateY(30px);
+                opacity: 0;
+            }
+        }
+
+        .popup-scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00f06a, transparent);
+            opacity: 0.15;
+            animation: popupScanDown 4s linear infinite;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        @keyframes popupScanDown {
+            0% {
+                top: 0;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .popup-card {
+                padding: 30px 22px 28px;
+                border-radius: 16px;
+            }
+
+            .popup-greeting h2 {
+                font-size: 1.3rem;
+            }
+
+            .popup-subtitle-text {
+                font-size: 0.7rem;
+                letter-spacing: 2px;
+            }
+
+            .popup-message {
+                font-size: 0.85rem;
+            }
+
+            .popup-logo img {
+                width: 70px;
+            }
+
+            .popup-whatsapp-tip {
+                padding: 12px 14px;
+            }
+
+            .popup-cta-btn {
+                padding: 14px 24px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-particles" id="popupParticles"></div>
+        <div class="popup-card">
+            <div class="popup-scanline"></div>
+            <div class="popup-corner ptl"></div>
+            <div class="popup-corner ptr"></div>
+            <div class="popup-corner pbl"></div>
+            <div class="popup-corner pbr"></div>
+            <div class="popup-logo">
+                <img src="img/popup-logo.png" alt="Eskondidinho Eventos" />
+            </div>
+            <div class="popup-greeting">
+                <h2>Olá, seja bem-vindo(a)! <span class="popup-wave">👋</span></h2>
+            </div>
+            <p class="popup-subtitle-text">Eskondidinho Eventos</p>
+            <div class="popup-neon-divider"></div>
+            <div class="popup-message">
+                Estamos de <strong>cara nova</strong> e com algumas novidades importantes para
+                garantir a <strong>melhor experiência</strong> pra você!
+            </div>
+            <div class="popup-whatsapp-tip">
+                <span class="popup-tip-icon">📱</span>
+                <p>
+                    Ao finalizar a compra de <strong>ingressos</strong> ou a <strong>reserva de mesa</strong>,
+                    informe o seu <strong>número de WhatsApp</strong> para receber o
+                    <strong>QR Code de acesso</strong> diretamente na entrada.
+                    Rápido, prático e sem filas!
+                </p>
+            </div>
+            <button class="popup-cta-btn" onclick="closeEskPopup()">
+                ✨ ENTENDI, VAMOS LÁ!
+            </button>
+            <div class="popup-footer-text">
+                Eskondidinho agradece a sua atenção 💚
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // Check if user already saw the popup
+            if (localStorage.getItem('eskondidinho_popup_seen') === 'true') {
+                document.getElementById('popupOverlay').style.display = 'none';
+                return;
+            }
+            // Create particles
+            var container = document.getElementById('popupParticles');
+            for (var i = 0; i < 25; i++) {
+                var p = document.createElement('div');
+                p.className = 'popup-particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (4 + Math.random() * 6) + 's';
+                p.style.animationDelay = (Math.random() * 5) + 's';
+                p.style.width = (2 + Math.random() * 3) + 'px';
+                p.style.height = p.style.width;
+                container.appendChild(p);
+            }
+        })();
+        function closeEskPopup() {
+            var overlay = document.getElementById('popupOverlay');
+            overlay.classList.add('popup-closing');
+            setTimeout(function () { overlay.style.display = 'none'; }, 400);
+            localStorage.setItem('eskondidinho_popup_seen', 'true');
+        }
+    </script>
+
+    <!-- ============ NAVBAR ============ -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="navbar-logo">
+                <img src="img/logo-k.png" alt="Eskondidinho" class="logo-img-mobile"
+                    style="display: none; height: 50px;">
+                <span class="logo-text">ES<span class="logo-k">K</span>ONDIDINHO</span>
+            </a>
+
+            <ul class="navbar-menu" id="navMenu">
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li><a href="https://eskondidinhoeventos.pagtickets.com.br/" target="_blank" class="navbar-cta">🎟️
+                        Ingressos</a></li>
+            </ul>
+
+            <div class="navbar-social">
+                <a href="https://wa.me/554791813793" target="_blank" title="WhatsApp"><i
+                        class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/eskondidinho_eventos/" target="_blank" title="Instagram"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/Eskondidinho/" target="_blank" title="Facebook"><i
+                        class="fab fa-facebook"></i></a>
+            </div>
+
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============ URGENCY BANNER (auto-detects today/tomorrow) ============ -->
+    <div class="urgency-banner" id="urgencyBanner" style="display:none;">
+        <div class="urgency-inner">
+            <span class="urgency-pulse"></span>
+            <span class="urgency-text" id="urgencyText"></span>
+            <a href="#" class="urgency-cta" id="urgencyCTA" target="_blank">🎟️ Comprar Agora</a>
+        </div>
+    </div>
+    <style>
+        .urgency-banner {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+            background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+            padding: 10px 15px;
+            animation: urgencyGlow 2s ease-in-out infinite;
+        }
+        @keyframes urgencyGlow {
+            0%, 100% { box-shadow: 0 2px 15px rgba(255, 215, 0, 0.15); }
+            50% { box-shadow: 0 2px 25px rgba(255, 215, 0, 0.35); }
+        }
+        .urgency-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            flex-wrap: wrap;
+        }
+        .urgency-pulse {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #ff4444;
+            box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7);
+            animation: urgencyPulseAnim 1.5s infinite;
+        }
+        @keyframes urgencyPulseAnim {
+            0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(255, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
+        }
+        .urgency-text {
+            color: #fff; font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; font-weight: 600; letter-spacing: 0.5px;
+        }
+        .urgency-text strong { color: #ffd700; }
+        .urgency-cta {
+            background: #ffd700; color: #1a0a2e;
+            padding: 5px 16px; border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; font-weight: 800;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+        .urgency-cta:hover { background: #ffed4a; transform: scale(1.05); }
+        .urgency-banner + .hero,
+        body.has-urgency .navbar.scrolled { top: 42px !important; }
+        body.has-urgency .hero { padding-top: 42px; }
+        @media (max-width: 600px) {
+            .urgency-text { font-size: 0.72rem; }
+            .urgency-cta { font-size: 0.68rem; padding: 4px 12px; }
+        }
+    </style>
+    <script>
+        (function() {
+            // Auto-detect if next event is today or tomorrow
+            var evts = window.events || [];
+            if (!evts.length) return;
+            var now = new Date();
+            for (var i = 0; i < evts.length; i++) {
+                var parts = evts[i].date.split('-').map(Number);
+                var evDate = new Date(parts[0], parts[1]-1, parts[2]);
+                var diffDays = Math.floor((evDate - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+                if (diffDays === 0 || diffDays === 1) {
+                    var banner = document.getElementById('urgencyBanner');
+                    var txt = document.getElementById('urgencyText');
+                    var cta = document.getElementById('urgencyCTA');
+                    var label = diffDays === 0 ? '🔥 HOJE!' : '⚡ AMANHÃ!';
+                    txt.innerHTML = label + ' <strong>' + evts[i].name + '</strong> — ' + evts[i].bands.join(' • ') + ' — Últimos antecipados!';
+                    cta.href = evts[i].link;
+                    banner.style.display = 'block';
+                    document.body.classList.add('has-urgency');
+                    break;
+                }
+            }
+        })();
+    </script>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <video class="hero-video" autoplay muted loop playsinline disablePictureInPicture>
+                <source src="assets/Vídeo-bg-main-page.mp4" type="video/mp4">
+            </video>
+        </div>
+        <canvas id="particles-canvas"></canvas>
+
+        <div class="hero-content">
+            <div class="hero-badge" id="heroBadge">
+                🔥 <span>Garanta seu ingresso</span>
+            </div>
+
+            <div class="hero-logo-text">
+                <span class="hero-logo-main">ES<span class="hero-logo-k">K</span>ONDIDINHO</span>
+                <span class="hero-logo-sub">EVENTOS</span>
+            </div>
+
+            <h1>O Melhor Bailão do Vale do Itajaí</h1>
+
+            <div class="hero-next-event-banner">
+                <span class="hero-next-pulse"></span>
+                <span class="hero-next-icon">🔥</span>
+                <span class="hero-next-text">Próximo Evento!</span>
+                <span class="hero-next-arrow">↓</span>
+            </div>
+
+            <div id="heroEventInfo">
+                <p class="hero-event-name" id="heroEventName">Carregando...</p>
+                <p class="hero-event-details" id="heroEventDetails"></p>
+                <p class="hero-event-promo" id="heroEventPromo" style="display:none;"></p>
+            </div>
+
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countDays">00</span>
+                    <span class="countdown-label">Dias</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countHours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countMinutes">00</span>
+                    <span class="countdown-label">Min</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countSeconds">00</span>
+                    <span class="countdown-label">Seg</span>
+                </div>
+            </div>
+
+            <a href="#" class="hero-cta" id="heroCTA" target="_blank">
+                🎟️ Garantir Meu Ingresso
+            </a>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ============ EVENTOS ============ -->
+    <section id="eventos">
+        <div class="container">
+            <h2 class="section-title reveal">Agenda de <span>Junho</span></h2>
+            <p class="section-subtitle reveal">Escolha seu baile e garanta seu ingresso com antecedência!</p>
+
+            <div class="events-grid" id="eventsGrid">
+                <!-- Cards carregados dinamicamente pelo data-loader.js -->
+                <p style="color: #888; text-align: center; grid-column: 1/-1; padding: 40px 0;">🔄 Carregando eventos...
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ RESERVA DE MESAS VIP ============ -->
+    <section id="reservas">
+        <div class="container">
+            <div class="reservas-wrapper">
+                <div class="reservas-info reveal-left">
+                    <h2>Reserve sua <span>Mesa VIP</span></h2>
+                    <p>Tenha mais conforto e viva a melhor experiência no Eskondidinho! Escolha o tipo de mesa ideal
+                        para sua noite e aproveite o baile com exclusividade.</p>
+
+                    <div class="mesa-grid">
+                        <div class="mesa-card">
+                            <h4>Mesa Pista</h4>
+                            <p class="mesa-price">R$ 80</p>
+                            <p class="mesa-desc">Mesas 4-25 · Ao redor da pista · 4-6 pessoas</p>
+                            <p class="mesa-obs">✅ Acompanha 1 ingresso</p>
+                        </div>
+                        <div class="mesa-card">
+                            <h4>Mesa Janela</h4>
+                            <p class="mesa-price">R$ 60</p>
+                            <p class="mesa-desc">Mesas 36-52 · Lateral/Janela · 4-6 pessoas</p>
+                            <p class="mesa-obs">✅ Acompanha 1 ingresso</p>
+                        </div>
+                        <div class="mesa-card">
+                            <h4>Mesa Bar</h4>
+                            <p class="mesa-price">R$ 60</p>
+                            <p class="mesa-desc">Mesas 53-63 · Próximo ao bar · 4-6 pessoas</p>
+                            <p class="mesa-obs">✅ Acompanha 1 ingresso</p>
+                        </div>
+                        <div class="mesa-card">
+                            <h4>Bistrô</h4>
+                            <p class="mesa-price">R$ 100</p>
+                            <p class="mesa-desc">Mesas 26-29, 32-35 · Altas · Ideal 2 pessoas</p>
+                            <p class="mesa-obs">✅ Acompanha 1 ingresso</p>
+                        </div>
+                        <div class="mesa-card">
+                            <h4>Palco</h4>
+                            <p class="mesa-price">R$ 150</p>
+                            <p class="mesa-desc">Mesas 30-31 · Balcão baixo · Vista privilegiada</p>
+                            <p class="mesa-obs">✅ Acompanha 1 ingresso</p>
+                        </div>
+                        <div class="mesa-card">
+                            <h4>Camarote VIP</h4>
+                            <p class="mesa-price">R$ 100</p>
+                            <p class="mesa-desc">Camarotes 1-3 · Poltronas fixas · 6-8 pessoas</p>
+                            <p class="mesa-obs">✅ Acompanha 1 ingresso</p>
+                        </div>
+                    </div>
+
+                    <a href="reservas.html" class="reservas-cta">
+                        🍾 Ver Mapa de Mesas & Reservar
+                    </a>
+                </div>
+
+                <div class="reservas-visual reveal-right">
+                    <div class="reservas-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">🍾</span>
+                            <h4>Mesa Exclusiva</h4>
+                            <p>Sua mesa garantida a noite toda</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🅿️</span>
+                            <h4>Estacionamento</h4>
+                            <p>Amplo estacionamento no local (R$ 25,00)</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎤</span>
+                            <h4>Visão do Palco</h4>
+                            <p>Posições estratégicas para curtir o show</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">⭐</span>
+                            <h4>Conforto Total</h4>
+                            <p>Ambiente climatizado e atendimento VIP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ COMO FUNCIONA ============ -->
+    <section id="como-funciona">
+        <div class="container">
+            <h2 class="section-title reveal">Como <span>Funciona</span></h2>
+            <p class="section-subtitle reveal">Primeira vez no Eskondidinho? Veja como é fácil!</p>
+
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-number">1</div>
+                    <span class="step-icon">🎫</span>
+                    <h3>Compre Online</h3>
+                    <p>Garanta seu ingresso pelo site com desconto antecipado no PagTickets.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">2</div>
+                    <span class="step-icon">📍</span>
+                    <h3>Venha ao Local</h3>
+                    <p>Rua Bruno Vicente da Luz, 603 — Espinheiros, Itajaí, SC. Fácil acesso!</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">3</div>
+                    <span class="step-icon">🎶</span>
+                    <h3>Curta o Baile</h3>
+                    <p>Dance, cante e se divirta ao som das melhores bandas do Sul do Brasil!</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">4</div>
+                    <span class="step-icon">📸</span>
+                    <h3>Guarde as Memórias</h3>
+                    <p>Confira as fotos dos eventos no nosso Instagram e marque os amigos!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PROVA SOCIAL ============ -->
+    <section id="prova-social">
+        <div class="container">
+            <h2 class="section-title reveal">Números que <span>Falam</span></h2>
+            <p class="section-subtitle reveal">Mais de uma década fazendo história no Vale do Itajaí</p>
+
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="13">0</div>
+                    <div class="stat-label">Anos de História</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Eventos Realizados</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">Mil Pessoas</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="200">0</div>
+                    <div class="stat-label">Bandas Diferentes</div>
+                </div>
+            </div>
+
+            <p class="social-quote reveal">
+                "Desde 2013 fazendo o <span>melhor baile</span> do Vale do Itajaí. Venha viver essa experiência!"
+            </p>
+
+            <div class="instagram-section reveal">
+                <a href="https://www.instagram.com/eskondidinho_eventos/" target="_blank" class="instagram-btn">
+                    <i class="fab fa-instagram"></i> Siga no Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ MENORES ============ -->
+    <section id="menores">
+        <div class="container">
+            <div class="menores-card reveal">
+                <h3>⚠️ Atenção Menores de 16 a 17 Anos</h3>
+                <p>Para participar dos nossos eventos é necessário trazer o formulário de autorização devidamente
+                    preenchido e assinado pelos pais ou responsáveis.</p>
+                <a href="https://www.eskondidinho.com.br/_files/ugd/3e2806_11ef1a56fe09499db10fbe1ca996fdd4.pdf"
+                    target="_blank" class="menores-link">
+                    <i class="fas fa-file-pdf"></i> Baixar Formulário
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer id="contato">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-about">
+                    <h4>Sobre o Eskondidinho</h4>
+                    <p>Idealizado pelo músico Samuel Mathias de Assis, o Eskondidinho nasceu em 2013 no bairro
+                        Espinheiros em Itajaí. Desde então, é referência em bailes e diversão no Vale do Itajaí, com os
+                        melhores shows da região sul do país!</p>
+                    <div class="footer-social">
+                        <a href="https://wa.me/554791813793" target="_blank" title="WhatsApp"><i
+                                class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/eskondidinho_eventos/" target="_blank" title="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/Eskondidinho/" target="_blank" title="Facebook"><i
+                                class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#eventos">Eventos</a></li>
+                        <li><a href="#reservas">Reservar Mesa</a></li>
+                        <li><a href="#como-funciona">Como Funciona</a></li>
+                        <li><a href="https://eskondidinhoeventos.pagtickets.com.br/" target="_blank">Comprar
+                                Ingressos</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <span>R. Bruno Vicente da Luz, 603 — Espinheiros, Itajaí - SC, 88317-020</span>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fab fa-whatsapp"></i></span>
+                            <a href="https://wa.me/554791813793" target="_blank">(47) 9 1813-3793</a>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                            <a href="mailto:eventoseskondidinho@gmail.com">eventoseskondidinho@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Localização</h4>
+                    <div class="footer-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3564.2!2d-48.6658!3d-26.9119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94df326265dce445%3A0x2d39b0ef4946e936!2sEskondidinho%20Eventos!5e0!3m2!1spt-BR!2sbr!4v1"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Eskondidinho Eventos — CNPJ: 02.891.140/0001-22 — Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp floating button -->
+    <a href="https://wa.me/554791813793?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20os%20pr%C3%B3ximos%20eventos!"
+        target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="data-loader.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Carrega eventos dinamicamente do GitHub
+        loadEventsData().then(data => {
+            if (data) renderEventCards(data);
+        });
+    </script>
+</body>
+
+</html>
