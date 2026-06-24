@@ -4,80 +4,19 @@
    Dynamic Hero, Number Counter
    ============================================ */
 
-// ===== EVENT DATA =====
-const events = [
-    {
-        date: '2026-06-03',
-        time: '22:00',
-        name: 'Mega Tri Baile',
-        bands: ['Novos Garotos', 'Banda Gdó', 'Garotos de Ouro'],
-        promo: 'Elas FREE até 23h',
-        link: 'https://eskondidinhoeventos.pagtickets.com.br/mega-tri-baile-novos-garotos-banda-gdo-garotos-de-ouro-elas-free-ate-23h__23787/'
-    },
-    {
-        date: '2026-06-05',
-        time: '22:00',
-        name: 'Forrónejo',
-        bands: ['Ricardo & Juninho', 'Samuka & Brasinha'],
-        promo: 'FREE UNISSEX até 23h',
-        link: 'https://eskondidinhoeventos.pagtickets.com.br/forronejo-ricardo-juninho-samuka-brasinha-free-unissex-ate-23h__23961/'
-    },
-    {
-        date: '2026-06-12',
-        time: '22:00',
-        name: 'Baile dos Namorados',
-        bands: ['As Garotinhas de Ouro', 'Ricardo & Juninho', 'Samuka …'],
-        promo: 'Elas FREE até 23h',
-        link: 'https://eskondidinhoeventos.pagtickets.com.br/baile-dos-namorados-as-garotinhas-de-ouro-ricardo-juninho-samuka-brasinha-portal-gaucho-elas-free-ate-23h__23963/'
-    },
-    {
-        date: '2026-06-19',
-        time: '22:00',
-        name: 'Gigante da Vaneira',
-        bands: ['Ricardo & Juninho', 'Samuka & Brasinha', 'Legião Gaúch…'],
-        promo: 'Elas FREE até 23h',
-        link: 'https://eskondidinhoeventos.pagtickets.com.br/gigante-da-vaneira-ricardo-juninho-samuka-brasinha-legiao-gaucha-elas-free-ate-23h__23965/'
-    },
-    {
-        date: '2026-06-20',
-        time: '22:00',
-        name: 'Sabadão Top',
-        bands: ['Ricardo & Juninho', 'Samuka & Brasinha', 'Wilceu Pause'],
-        promo: '',
-        link: 'https://eskondidinhoeventos.pagtickets.com.br/sabadao-top-ricardo-juninho-samuka-brasinha-wilceu-pause__23967/'
-    },
-    {
-        date: '2026-06-26',
-        time: '22:00',
-        name: 'Super Sexta',
-        bands: ['26', '06 - Ricardo & Juninho', 'Samuka & Brasinha', 'Grupo Modão…'],
-        promo: 'Elas FREE até 23h',
-        link: 'https://eskondidinhoeventos.pagtickets.com.br/super-sexta-2606-ricardo-juninho-samuka-brasinha-grupo-modao-elas-free-ate-23h__23969/'
-    },
-    {
-        date: '2026-06-27',
-        time: '22:00',
-        name: 'Flashback do Eskondidinho',
-        bands: ['Flashback do Eskondidinho'],
-        promo: '',
-        link: 'https://eskondidinhoeventos.pagtickets.com.br/flashback-do-eskondidinho__23971/'
-    }
-];
+// ===== NEXT EVENT (populated dynamically from events.json via data-loader) =====
+// Hero/countdown/badges leem desta variável. setNextEvent() é chamada pelo
+// init no index.html após loadEventsData() resolver.
+let _nextEvent = null;
 
-// ===== FIND NEXT EVENT =====
+window.setNextEvent = function (ev) {
+    _nextEvent = ev || null;
+    updateHero();
+    startCountdown();
+};
+
 function getNextEvent() {
-    const now = new Date();
-    for (const event of events) {
-        const [year, month, day] = event.date.split('-').map(Number);
-        const [hour] = event.time.split(':').map(Number);
-        // Event ends at 04:00 next day
-        const eventEnd = new Date(year, month - 1, day + 1, 4, 0, 0);
-        if (now < eventEnd) {
-            return event;
-        }
-    }
-    // If all events are past, return last event
-    return events[events.length - 1];
+    return _nextEvent;
 }
 
 // ===== DYNAMIC HERO =====
@@ -107,7 +46,7 @@ function updateHero() {
         heroPromo.style.display = 'none';
     }
 
-    heroCTA.href = nextEvent.link;
+    heroCTA.href = nextEvent.link_ingresso || nextEvent.link || '#';
 
     // Check urgency — dynamic badge based on proximity
     const eventDate = new Date(year, month - 1, day, 22, 0, 0);
@@ -134,6 +73,7 @@ function updateHero() {
 let countdownInterval;
 
 function startCountdown() {
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
     const nextEvent = getNextEvent();
     if (!nextEvent) return;
 
