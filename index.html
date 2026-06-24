@@ -1024,9 +1024,17 @@
     <script src="data-loader.js"></script>
     <script src="script.js"></script>
     <script>
-        // Carrega eventos dinamicamente do GitHub
+        // Carrega eventos dinamicamente do GitHub e popula cards + hero.
+        // Hero/countdown ficam em "Carregando..." até o JSON resolver.
         loadEventsData().then(data => {
-            if (data) renderEventCards(data);
+            if (!data || !Array.isArray(data.events)) return;
+            renderEventCards(data);
+            const now = new Date();
+            const next = data.events.find(ev => {
+                const [y, m, d] = ev.date.split('-').map(Number);
+                return new Date(y, m - 1, d + 1, 4, 0, 0) > now;
+            }) || data.events[data.events.length - 1];
+            if (next && window.setNextEvent) window.setNextEvent(next);
         });
     </script>
 </body>
