@@ -225,15 +225,12 @@ function cleanBandName(band) {
 
 function formatPromo(promo) {
     if (!promo) return '';
+    // Promo sempre em CAIXA ALTA (decisão do Ruan — fica melhor pra promoção).
     let p = promo.trim().replace(/[…]+$/, '').replace(/\.+$/, '').trim();
-    // Normaliza truncamentos comuns
-    if (/^ELAS\s+F$/i.test(p)) return 'Elas FREE até 23h';
-    if (/^ELAS\s+FREE\s+AT[ÉE]$/i.test(p)) return 'Elas FREE até 23h';
-    if (/^FREE\s+UNISSEX\s+AT[ÉE]\s+AS$/i.test(p)) return 'FREE UNISSEX até as 23h';
-    if (/^FREE\s+UNISSEX\s+AT[ÉE]$/i.test(p)) return 'FREE UNISSEX até as 23h';
-    if (/^ELAS\s+FREE\s+AT[ÉE]\s+23H$/i.test(p)) return 'Elas FREE até 23h';
-    if (/^FREE\s+UNISSEX\s+AT[ÉE]\s+AS\s+23H$/i.test(p)) return 'FREE UNISSEX até as 23h';
-    return p;
+    // Conserta truncamentos comuns do scraping (…) completando pra "ATÉ 23H"
+    if (/^ELAS\s+F$/i.test(p)) p = 'ELAS FREE ATÉ 23H';
+    p = p.replace(/\bAT[ÉE]\s+AS$/i, 'ATÉ AS 23H').replace(/\bAT[ÉE]$/i, 'ATÉ 23H');
+    return p.toUpperCase();
 }
 
 // ===== DYNAMIC BADGES (index.html event cards) =====
