@@ -501,65 +501,13 @@
     <script>
         // ============================
         // EVENT DATA CONFIG
+        // Carregado dinamicamente do events.json (repo -data), keyed por
+        // id_reserva (= o ?id= da URL) com fallback pra id_ingresso.
+        // Antes era hardcoded só com eventos de junho → clique quebrava em
+        // julho+. Agora funciona pra qualquer evento, sem deploy.
         // ============================
-        const EVENTS = {
-            '23788': {
-                date: '2026-06-03',
-                day: '03',
-                weekday: 'QUARTA',
-                name: 'Mega Tri Baile',
-                bands: 'Novos Garotos • Banda Gdó • Garotos de Ouro',
-                url: 'https://eskondidinhoeventos.pagtickets.com.br/reservas-0306-mega-tri-baile-novos-garotos-banda-gdo-garotos-de-ouro-elas-free-ate-23h__23788/'
-            },
-            '23962': {
-                date: '2026-06-05',
-                day: '05',
-                weekday: 'SEXTA',
-                name: 'Forrónejo',
-                bands: 'Ricardo & Juninho • Samuka & Brasinha',
-                url: 'https://eskondidinhoeventos.pagtickets.com.br/reservas-0506-forronejo__23962/'
-            },
-            '23964': {
-                date: '2026-06-12',
-                day: '12',
-                weekday: 'SEXTA',
-                name: 'Baile dos Namorados',
-                bands: 'As Garotinhas de Ouro • Ricardo & Juninho • Samuka …',
-                url: 'https://eskondidinhoeventos.pagtickets.com.br/reservas-1206-baile-dos-namorados__23964/'
-            },
-            '23966': {
-                date: '2026-06-19',
-                day: '19',
-                weekday: 'SEXTA',
-                name: 'Gigante da Vaneira',
-                bands: 'Ricardo & Juninho • Samuka & Brasinha • Legião Gaúch…',
-                url: 'https://eskondidinhoeventos.pagtickets.com.br/reservas-1906-gigante-da-vaneira__23966/'
-            },
-            '23968': {
-                date: '2026-06-20',
-                day: '20',
-                weekday: 'SÁBADO',
-                name: 'Sabadão Top',
-                bands: 'Ricardo & Juninho • Samuka & Brasinha • Wilceu Pause',
-                url: 'https://eskondidinhoeventos.pagtickets.com.br/reservas-2006-sabadao-top__23968/'
-            },
-            '23970': {
-                date: '2026-06-26',
-                day: '26',
-                weekday: 'SEXTA',
-                name: 'Super Sexta',
-                bands: '26 • 06 - Ricardo & Juninho • Samuka & Brasinha • Grupo Modão…',
-                url: 'https://eskondidinhoeventos.pagtickets.com.br/reservas-2606-super-sexta-2606__23970/'
-            },
-            '23972': {
-                date: '2026-06-27',
-                day: '27',
-                weekday: 'SÁBADO',
-                name: 'Flashback do Eskondidinho',
-                bands: 'Flashback do Eskondidinho',
-                url: 'https://eskondidinhoeventos.pagtickets.com.br/reservas-2706-flashback-do-eskondidinho__23972/'
-            }
-        };
+        let EVENTS = {};
+        let eventData = null;
 
         // Table → sector mapping for building PagTickets category hints
         function getTableSector(tableNum) {
@@ -578,18 +526,47 @@
         // ============================
         const params = new URLSearchParams(window.location.search);
         const eventId = params.get('id');
-        const eventData = EVENTS[eventId];
 
-        if (!eventData) {
-            document.getElementById('eventName').textContent = 'Evento não encontrado';
-            document.getElementById('eventBands').textContent = 'Volte e selecione um evento válido.';
-        } else {
-            document.getElementById('eventDay').textContent = eventData.day;
-            document.getElementById('eventWeekday').textContent = eventData.weekday;
-            document.getElementById('eventName').textContent = eventData.name;
-            document.getElementById('eventBands').textContent = eventData.bands;
-            document.title = `Mesa — ${eventData.name} | ESKONDIDINHO`;
+        function applyEvent() {
+            eventData = EVENTS[eventId] || null;
+            if (!eventData) {
+                document.getElementById('eventName').textContent = 'Evento não encontrado';
+                document.getElementById('eventBands').textContent = 'Volte e selecione um evento válido.';
+            } else {
+                document.getElementById('eventDay').textContent = eventData.day;
+                document.getElementById('eventWeekday').textContent = eventData.weekday;
+                document.getElementById('eventName').textContent = eventData.name;
+                document.getElementById('eventBands').textContent = eventData.bands;
+                document.title = `Mesa — ${eventData.name} | ESKONDIDINHO`;
+            }
         }
+
+        // Carrega os eventos do repo -data (mesma fonte do resto do site) e
+        // monta o EVENTS por id_reserva (fallback id_ingresso).
+        function loadEventsConfig() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://raw.githubusercontent.com/krum-lab/eskondidinho-data/main/events.json?t=' + Date.now(), true);
+            xhr.onload = function () {
+                try {
+                    const data = JSON.parse(xhr.responseText);
+                    const list = (data && data.events) ? data.events : (Array.isArray(data) ? data : []);
+                    EVENTS = {};
+                    list.forEach(ev => {
+                        const bands = ev.bands_text || (Array.isArray(ev.bands) ? ev.bands.join(' • ') : (ev.bands || ''));
+                        const rec = {
+                            date: ev.date, day: ev.day, weekday: ev.weekday,
+                            name: ev.name, bands: bands, url: ev.link_reserva || ''
+                        };
+                        if (ev.id_reserva) EVENTS[String(ev.id_reserva)] = rec;
+                        if (ev.id_ingresso && !EVENTS[String(ev.id_ingresso)]) EVENTS[String(ev.id_ingresso)] = rec;
+                    });
+                } catch (e) { /* applyEvent mostra "não encontrado" */ }
+                applyEvent();
+            };
+            xhr.onerror = applyEvent;
+            xhr.send();
+        }
+        loadEventsConfig();
 
         // ============================
         // LOAD OCCUPIED TABLES
